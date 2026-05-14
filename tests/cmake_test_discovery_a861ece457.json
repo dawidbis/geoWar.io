@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "test_annexation",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "Placeholder",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_annexation.cpp",
+          "line": 2
+        }
+      ]
+    }
+  ]
+}

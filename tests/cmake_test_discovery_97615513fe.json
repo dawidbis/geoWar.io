@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "test_population",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "Placeholder",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_population.cpp",
+          "line": 2
+        }
+      ]
+    }
+  ]
+}

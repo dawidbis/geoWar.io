@@ -33,19 +33,19 @@ Walka lądowa jest wynikiem **ciśnienia populacji wojskowej** na granicy międz
 
 | # | Dokument | Opis |
 |---|---|---|
-| 01 | [Mapa i prowincje](docs/01-mapa-i-prowincje.md) | Kafelki, prowincje, terreny lądowe i wodne, współwłasność |
-| 02 | [Populacja](docs/02-populacja.md) | Podział, przyrost, automatyzacja, transport |
-| 03 | [Zasoby](docs/03-zasoby.md) | Złoto, zaopatrzenie, elektryczność (sieć), uran |
-| 04 | [Budynki](docs/04-budynki.md) | Lista, efekty, koszty, poziomy, wymagania |
-| 05 | [Walka lądowa](docs/05-walka.md) | Atak, modyfikatory, wzory, zaopatrzenie, aneksja, multi-attack |
-| 06 | [Handel](docs/06-handel.md) | Transporty lądowe, morskie, lotnicze; pakty handlowe |
-| 07 | [Logistyka](docs/07-logistyka.md) | Połączenia, transport ludności i zaopatrzenia |
-| 08 | [Dyplomacja](docs/08-dyplomacja.md) | Sojusze, pakty multilateralne, sprzedaż prowincji, embargo |
-| 09 | [Broń strategiczna](docs/09-bron-strategiczna.md) | Uran, bomba atomowa (bombowiec), wodorowa (silos), obrony |
-| 10 | [Boty](docs/10-boty.md) | Poziomy AI, zachowania |
-| 11 | [Rozgrywka](docs/11-rozgrywka.md) | Start gry, stolica, warunek zwycięstwa, lobby |
-| 12 | [Moduł morski](docs/12-modul-morski.md) | Porty, okręty wojenne, piractwo, handel morski |
-| 13 | [Moduł powietrzny](docs/13-modul-powietrzny.md) | Lotniska, myśliwce, bombowce, obrona przeciwlotnicza |
+| 01 | [Mapa i prowincje](documentation/01-mapa-i-prowincje.md) | Kafelki, prowincje, terreny lądowe i wodne, współwłasność |
+| 02 | [Populacja](documentation/02-populacja.md) | Podział, przyrost, automatyzacja, transport |
+| 03 | [Zasoby](documentation/03-zasoby.md) | Złoto, zaopatrzenie, elektryczność (sieć), uran |
+| 04 | [Budynki](documentation/04-budynki.md) | Lista, efekty, koszty, poziomy, wymagania |
+| 05 | [Walka lądowa](documentation/05-walka.md) | Atak, modyfikatory, wzory, zaopatrzenie, aneksja, multi-attack |
+| 06 | [Handel](documentation/06-handel.md) | Transporty lądowe, morskie, lotnicze; pakty handlowe |
+| 07 | [Logistyka](documentation/07-logistyka.md) | Połączenia, transport ludności i zaopatrzenia |
+| 08 | [Dyplomacja](documentation/08-dyplomacja.md) | Sojusze, pakty multilateralne, sprzedaż prowincji, embargo |
+| 09 | [Broń strategiczna](documentation/09-bron-strategiczna.md) | Uran, bomba atomowa (bombowiec), wodorowa (silos), obrony |
+| 10 | [Boty](documentation/10-boty.md) | Poziomy AI, zachowania |
+| 11 | [Rozgrywka](documentation/11-rozgrywka.md) | Start gry, stolica, warunek zwycięstwa, lobby |
+| 12 | [Moduł morski](documentation/12-modul-morski.md) | Porty, okręty wojenne, piractwo, handel morski |
+| 13 | [Moduł powietrzny](documentation/13-modul-powietrzny.md) | Lotniska, myśliwce, bombowce, obrona przeciwlotnicza |
 
 ## Konwencje używane w dokumentacji
 

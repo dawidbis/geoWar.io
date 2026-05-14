@@ -1,33 +1,46 @@
+// shared/include/shared/net/Message.hpp
 #pragma once
-#include "MessageTypes.hpp"
 #include <cstdint>
 #include <vector>
-#include <span>
 
-namespace gs {
+namespace gs::net {
 
-/// Nagłówek każdej wiadomości (8 bajtów, little-endian)
-struct MessageHeader {
-    MessageType type{};
-    uint16_t    payloadSize{0};
-    uint32_t    reserved{0};  // padding / future use (sequence number itp.)
-};
-static_assert(sizeof(MessageHeader) == 8);
+    enum class MessageType : uint16_t {
+        // ── Lobby ─────────────────────────────────────────────────────────────
+        ClientHello = 0x0001,  // C→S: dołącz do lobby (nazwa gracza)
+        ServerWelcome = 0x0002,  // S→C: przyznane entityId + aktualny stan lobby
+        LobbyState = 0x0003,  // S→C: broadcast — kto jest w lobby
+        LobbyStartGame = 0x0004,  // S→C: gra startuje, payload = GameStartInfo
 
-/// Wiadomość = nagłówek + payload
-struct Message {
-    MessageHeader           header{};
-    std::vector<uint8_t>    payload{};
+        // ── Wejście gracza ────────────────────────────────────────────────────
+        PlayerInput = 0x0010,  // C→S: komenda gracza (attack, build, diplomacy…)
 
-    // Rozmiar całości (nagłówek + payload)
-    [[nodiscard]] size_t totalSize() const noexcept {
-        return sizeof(MessageHeader) + payload.size();
-    }
+        // ── Stan gry ──────────────────────────────────────────────────────────
+        GameStateFull = 0x0020,  // S→C: pełny snapshot (przy connect/reconnect)
+        GameStateDelta = 0x0021,  // S→C: delta per tick (tylko zmienione pola)
 
-    // Czy payload zgadza się z rozmiarem w nagłówku
-    [[nodiscard]] bool isValid() const noexcept {
-        return payload.size() == header.payloadSize;
-    }
-};
+        // ── Debug / Dev ───────────────────────────────────────────────────────
+        DebugStep = 0xD001,  // C→S: wykonaj N ticków (tryb debug)
+        DebugSetTickrate = 0xD002,  // C→S: zmień tickrate serwera
+        DebugQueryState = 0xD003,  // C→S: zażądaj pełnego stanu
+        DebugStateResponse = 0xD004,  // S→C: odpowiedź z pełnym stanem (JSON lub binary)
 
-} // namespace gs
+        // ── Błędy ─────────────────────────────────────────────────────────────
+        ErrorResponse = 0xFFFF,
+    };
+
+#pragma pack(push, 1)
+    struct MessageHeader {
+        MessageType type{};
+        uint16_t    payloadSize{ 0 };
+        uint32_t    reserved{ 0 };
+    };
+#pragma pack(pop)
+    static_assert(sizeof(MessageHeader) == 8, "MessageHeader must be exactly 8 bytes");
+
+    struct Message {
+        MessageHeader header{};
+        std::vector<uint8_t> payload;
+    };
+
+} // namespace gs::net

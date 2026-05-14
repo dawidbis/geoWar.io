@@ -6,7 +6,7 @@ if(NOT GS_SERVER_SOURCES)
     set(GS_SERVER_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/gs_server_dummy.cpp")
 endif()
 
-add_executable(gs_server ${GS_SERVER_SOURCES})
+add_executable(gs_server ${GS_SERVER_SOURCES} "src/net/Session.cpp" "src/net/GameServer.cpp" "src/main.cpp")
 add_executable(gs::server ALIAS gs_server)
 
 target_include_directories(gs_server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -22,7 +22,7 @@ if(NOT GS_SERVER_LIB_SOURCES)
     set(GS_SERVER_LIB_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/gs_server_lib_dummy.cpp")
 endif()
 
-add_library(gs_server_lib STATIC ${GS_SERVER_LIB_SOURCES})
+add_library(gs_server_lib STATIC ${GS_SERVER_LIB_SOURCES} "src/net/Session.cpp" "src/net/GameServer.cpp" "src/main.cpp")
 add_library(gs::server_lib ALIAS gs_server_lib)
 
 target_include_directories(gs_server_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

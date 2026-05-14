@@ -1,15 +1,20 @@
 {
-  "tests": 1,
+  "tests": 2,
   "name": "AllTests",
   "testsuites": [
     {
-      "name": "test_serializer",
-      "tests": 1,
+      "name": "SerializerTest",
+      "tests": 2,
       "testsuite": [
         {
-          "name": "Placeholder",
+          "name": "WriteAndReadBasicTypes",
           "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
-          "line": 2
+          "line": 6
+        },
+        {
+          "name": "BufferUnderflowThrows",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 30
         }
       ]
     }

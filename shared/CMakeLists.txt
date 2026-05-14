@@ -12,7 +12,7 @@ if(NOT GS_SHARED_SOURCES)
     set(GS_SHARED_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/gs_shared_dummy.cpp")
 endif()
 
-add_library(gs_shared STATIC ${GS_SHARED_SOURCES})
+add_library(gs_shared STATIC ${GS_SHARED_SOURCES} "src/net/Serializer.cpp")
 add_library(gs::shared ALIAS gs_shared)
 
 target_include_directories(gs_shared

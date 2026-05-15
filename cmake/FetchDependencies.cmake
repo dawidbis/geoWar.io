@@ -5,27 +5,25 @@ set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 # ── Boost (serwer) ────────────────────────────────────────────────────────────
 if(GS_BUILD_SERVER)
-    # MODULE mode — działa z ręczną instalacją (sourceforge precompiled binaries)
-    # Asio jest header-only od Boost 1.70, nie potrzebujemy kompilowanego system
     find_package(Boost 1.70 REQUIRED)
 
     if(NOT Boost_FOUND)
         message(FATAL_ERROR
             "[GS] Boost not found.\n"
-            "Ustaw BOOST_ROOT na folder instalacji, np:\n"
-            "  cmake -B build -DBOOST_ROOT=C:/local/boost_1_91_0\n"
+            "Ustaw BOOST_ROOT, np: cmake -B build -DBOOST_ROOT=C:/local/boost_1_91_0\n"
         )
     endif()
 
     message(STATUS "[GS] Boost found: ${Boost_VERSION} at ${Boost_INCLUDE_DIRS}")
 
-    # Header-only interface target — Asio nie wymaga linkowania Boost.System
     add_library(gs_boost_asio INTERFACE)
     add_library(gs::boost_asio ALIAS gs_boost_asio)
     target_include_directories(gs_boost_asio INTERFACE ${Boost_INCLUDE_DIRS})
     target_compile_definitions(gs_boost_asio INTERFACE
         BOOST_ASIO_NO_DEPRECATED=1
-        BOOST_ASIO_STANDALONE       # nie wymaga Boost.System
+        # Windows: wymagane przez Boost.Asio
+        $<$<PLATFORM_ID:Windows>:_WIN32_WINNT=0x0601>
+        $<$<PLATFORM_ID:Windows>:WIN32_LEAN_AND_MEAN>
     )
 endif()
 

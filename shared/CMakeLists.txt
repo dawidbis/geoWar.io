@@ -1,18 +1,12 @@
 # shared/CMakeLists.txt
+# Serializer i Message są header-only (implementacja w .hpp).
+# Biblioteka shared istnieje żeby eksportować include path i opcje kompilatora.
 
-file(GLOB_RECURSE GS_SHARED_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-)
+# Dummy .cpp — bez niego CMake nie może zbudować STATIC lib
+set(GS_SHARED_DUMMY "${CMAKE_CURRENT_BINARY_DIR}/gs_shared_dummy.cpp")
+file(WRITE "${GS_SHARED_DUMMY}" "// intentionally empty\n")
 
-# Jeśli nie ma jeszcze żadnych .cpp — tworzymy dummy żeby CMake się nie poskarżył
-if(NOT GS_SHARED_SOURCES)
-    file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/gs_shared_dummy.cpp"
-        "// placeholder — usunięty automatycznie gdy pojawią się prawdziwe źródła\n"
-    )
-    set(GS_SHARED_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/gs_shared_dummy.cpp")
-endif()
-
-add_library(gs_shared STATIC ${GS_SHARED_SOURCES} "src/net/Serializer.cpp")
+add_library(gs_shared STATIC "${GS_SHARED_DUMMY}")
 add_library(gs::shared ALIAS gs_shared)
 
 target_include_directories(gs_shared

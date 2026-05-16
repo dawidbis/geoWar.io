@@ -99,6 +99,7 @@ namespace gs {
             uint32_t    id;
             std::string name;
             bool        isBot{ false };
+            bool        isReady{ false }; 
         };
 
         inline Message makeLobbyState(const std::vector<LobbyPlayerInfo>& players) {
@@ -108,6 +109,7 @@ namespace gs {
                 s.writeU32(p.id);
                 s.writeStr(p.name);
                 s.writeBool(p.isBot);
+                s.writeBool(p.isReady); 
             }
             return Message::make(MessageType::LobbyState, s);
         }

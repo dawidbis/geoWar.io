@@ -1,0 +1,103 @@
+{
+  "tests": 17,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "GameState",
+      "tests": 14,
+      "testsuite": [
+        {
+          "name": "GetEntityById",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 28
+        },
+        {
+          "name": "GetEntityName",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 37
+        },
+        {
+          "name": "GetTile",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 45
+        },
+        {
+          "name": "GetShare",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 58
+        },
+        {
+          "name": "RelationDefaultNotAtWar",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 79
+        },
+        {
+          "name": "SetAtWar",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 85
+        },
+        {
+          "name": "RelationFlagSetClear",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 94
+        },
+        {
+          "name": "InSameMilitaryPact",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 103
+        },
+        {
+          "name": "InSameEconomicPact",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 114
+        },
+        {
+          "name": "DirtyTrackingTiles",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 127
+        },
+        {
+          "name": "DirtyTrackingShares",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 137
+        },
+        {
+          "name": "PendingEventsCleared",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 147
+        },
+        {
+          "name": "NextAttackId",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 158
+        },
+        {
+          "name": "NextBuildingId",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 166
+        }
+      ]
+    },
+    {
+      "name": "PlayerProvinceShare",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "DominanceAbove50Percent",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 176
+        },
+        {
+          "name": "NoDominanceAt50Percent",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 182
+        },
+        {
+          "name": "NoDominanceBelow50Percent",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_gamestate.cpp",
+          "line": 188
+        }
+      ]
+    }
+  ]
+}

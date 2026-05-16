@@ -1,0 +1,42 @@
+{
+  "tests": 6,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "CombatSystem",
+      "tests": 6,
+      "testsuite": [
+        {
+          "name": "AttackInputCreatesAttack",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 86
+        },
+        {
+          "name": "AttackReducesSourceMilitary",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 98
+        },
+        {
+          "name": "AttackTakesSupplyFromSource",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 112
+        },
+        {
+          "name": "RetreatSetsStatus",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 127
+        },
+        {
+          "name": "RetreatReturnsAfterDelay",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 158
+        },
+        {
+          "name": "TerrainSpeedOrder",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_combat.cpp",
+          "line": 199
+        }
+      ]
+    }
+  ]
+}

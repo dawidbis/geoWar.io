@@ -1,0 +1,82 @@
+{
+  "tests": 14,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "WorldGen",
+      "tests": 14,
+      "testsuite": [
+        {
+          "name": "TileCountMatchesMapSize",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 41
+        },
+        {
+          "name": "TileIdsAreUnique",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 46
+        },
+        {
+          "name": "TileCoordinatesInBounds",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 53
+        },
+        {
+          "name": "MapDimensionsSet",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 61
+        },
+        {
+          "name": "LandProvincesCreated",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 69
+        },
+        {
+          "name": "SeaProvincesCreated",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 74
+        },
+        {
+          "name": "ProvinceTilesAreValid",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 79
+        },
+        {
+          "name": "TilesAssignedToCorrectProvince",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 91
+        },
+        {
+          "name": "SpawnCreatesSharesForAllPlayers",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 105
+        },
+        {
+          "name": "SpawnPlayersHaveStartPopulation",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 120
+        },
+        {
+          "name": "EntitiesHaveCapital",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 132
+        },
+        {
+          "name": "SpawnStartingGold",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 145
+        },
+        {
+          "name": "SameSeedGivesSameMap",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 155
+        },
+        {
+          "name": "DifferentSeedGivesDifferentMap",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_worldgen.cpp",
+          "line": 168
+        }
+      ]
+    }
+  ]
+}

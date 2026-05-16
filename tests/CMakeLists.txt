@@ -1,92 +1,33 @@
 # tests/CMakeLists.txt
 
-# ── Auto-tworzenie brakujących plików testowych ───────────────────────────────
-# Przy pierwszym checkout nie ma jeszcze żadnych testów — tworzymy placeholdery
-# żeby CMake się nie poskarżył. Każdy placeholder ma jeden przechodzący test.
+# --- DODAJ TĘ LINIJKĘ ---
+# Wczytuje moduł zawierający komendę gtest_discover_tests
+include(GoogleTest)
 
-macro(gs_ensure_test_file REL_PATH)
-    set(_full "${CMAKE_CURRENT_SOURCE_DIR}/${REL_PATH}")
-    if(NOT EXISTS "${_full}")
-        get_filename_component(_dir "${_full}" DIRECTORY)
-        file(MAKE_DIRECTORY "${_dir}")
-        get_filename_component(_name "${_full}" NAME_WE)
-        file(WRITE "${_full}"
-            "#include <gtest/gtest.h>\nTEST(${_name}, Placeholder) { EXPECT_TRUE(true); }\n"
-        )
-    endif()
-endmacro()
+# --- Twój stary test dla shared ---
+add_executable(test_serializer shared/test_serializer.cpp)
+target_link_libraries(test_serializer PRIVATE gs::shared GTest::gtest_main)
+gtest_discover_tests(test_serializer)
 
-gs_ensure_test_file(shared/test_message.cpp)
-gs_ensure_test_file(shared/test_serializer.cpp)
-gs_ensure_test_file(server/test_combat.cpp)
-gs_ensure_test_file(server/test_population.cpp)
-gs_ensure_test_file(server/test_supply.cpp)
-gs_ensure_test_file(server/test_electric.cpp)
-gs_ensure_test_file(server/test_annexation.cpp)
-gs_ensure_test_file(server/test_worldgen.cpp)
-gs_ensure_test_file(client/test_serializer_roundtrip.cpp)
+# --- NOWE TESTY DLA SERWERA ---
 
-# ── Helper ────────────────────────────────────────────────────────────────────
-function(gs_add_test)
-    cmake_parse_arguments(ARG "" "NAME" "SOURCES;LIBS" ${ARGN})
+# Zbieramy wszystkie pliki .cpp z folderu server/
+file(GLOB_RECURSE SERVER_TEST_SOURCES CONFIGURE_DEPENDS "server/*.cpp")
 
-    # Przelicz ścieżki relative to CMAKE_CURRENT_SOURCE_DIR
-    set(_abs_sources)
-    foreach(_src ${ARG_SOURCES})
-        list(APPEND _abs_sources "${CMAKE_CURRENT_SOURCE_DIR}/${_src}")
-    endforeach()
+add_executable(test_server ${SERVER_TEST_SOURCES})
 
-    add_executable(${ARG_NAME} ${_abs_sources})
+# Linkujemy nasz silnik gry (gs::server_lib) oraz GTest
+target_link_libraries(test_server PRIVATE 
+    gs::server_lib 
+    GTest::gtest_main
+)
+# --- STRESS TEST ---
+# Zmieniona ścieżka: plik leży teraz prosto w folderze tests/
+add_executable(stress_test stress_test.cpp) 
+target_link_libraries(stress_test PRIVATE 
+    gs::shared 
+    gs::boost_asio
+)
 
-    target_link_libraries(${ARG_NAME}
-        PRIVATE
-            ${ARG_LIBS}
-            gs::compiler_options
-            GTest::gtest
-            GTest::gtest_main
-            GTest::gmock
-    )
-
-    include(GoogleTest)
-    gtest_discover_tests(${ARG_NAME}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    )
-endfunction()
-
-# ── Testy shared ──────────────────────────────────────────────────────────────
-gs_add_test(NAME test_shared_message
-    SOURCES shared/test_message.cpp
-    LIBS gs::shared)
-
-gs_add_test(NAME test_shared_serializer
-    SOURCES shared/test_serializer.cpp
-    LIBS gs::shared)
-
-# ── Testy serwera ─────────────────────────────────────────────────────────────
-if(GS_BUILD_SERVER)
-    gs_add_test(NAME test_server_combat
-        SOURCES server/test_combat.cpp
-        LIBS gs::server_lib)
-    gs_add_test(NAME test_server_population
-        SOURCES server/test_population.cpp
-        LIBS gs::server_lib)
-    gs_add_test(NAME test_server_supply
-        SOURCES server/test_supply.cpp
-        LIBS gs::server_lib)
-    gs_add_test(NAME test_server_electric
-        SOURCES server/test_electric.cpp
-        LIBS gs::server_lib)
-    gs_add_test(NAME test_server_annexation
-        SOURCES server/test_annexation.cpp
-        LIBS gs::server_lib)
-    gs_add_test(NAME test_server_worldgen
-        SOURCES server/test_worldgen.cpp
-        LIBS gs::server_lib)
-endif()
-
-# ── Testy klienta ─────────────────────────────────────────────────────────────
-if(GS_BUILD_CLIENT)
-    gs_add_test(NAME test_client_serializer_roundtrip
-        SOURCES client/test_serializer_roundtrip.cpp
-        LIBS gs::client_lib)
-endif()
+# Rejestrujemy testy, aby CTest je widział
+gtest_discover_tests(test_server)

@@ -1,0 +1,113 @@
+{
+  "tests": 19,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "Serializer",
+      "tests": 12,
+      "testsuite": [
+        {
+          "name": "U8Roundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 36
+        },
+        {
+          "name": "U16Roundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 49
+        },
+        {
+          "name": "U32Roundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 60
+        },
+        {
+          "name": "I64Roundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 71
+        },
+        {
+          "name": "F32Roundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 84
+        },
+        {
+          "name": "BoolRoundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 95
+        },
+        {
+          "name": "StringRoundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 106
+        },
+        {
+          "name": "MixedRoundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 117
+        },
+        {
+          "name": "UnderflowThrows",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 143
+        },
+        {
+          "name": "TakeResetsBuffer",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 152
+        },
+        {
+          "name": "LittleEndianU16",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 169
+        },
+        {
+          "name": "LittleEndianU32",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 177
+        }
+      ]
+    },
+    {
+      "name": "Message",
+      "tests": 7,
+      "testsuite": [
+        {
+          "name": "DefaultIsInvalid",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 187
+        },
+        {
+          "name": "ValidAfterSetup",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 192
+        },
+        {
+          "name": "HeaderBytesRoundtrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 203
+        },
+        {
+          "name": "ClientHelloFactory",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 212
+        },
+        {
+          "name": "ServerWelcomeFactory",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 225
+        },
+        {
+          "name": "LobbyStateFactory",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 239
+        },
+        {
+          "name": "DebugStepFactory",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\shared\\test_serializer.cpp",
+          "line": 261
+        }
+      ]
+    }
+  ]
+}

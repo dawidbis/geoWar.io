@@ -1,0 +1,67 @@
+{
+  "tests": 11,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "DiplomacySystem",
+      "tests": 11,
+      "testsuite": [
+        {
+          "name": "WarDeclaration",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 22
+        },
+        {
+          "name": "WarIsSymmetric",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 39
+        },
+        {
+          "name": "WarEmbargoAutomatic",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 51
+        },
+        {
+          "name": "TraitorDebuffOnPactBetrayal",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 65
+        },
+        {
+          "name": "CreateMilitaryPact",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 83
+        },
+        {
+          "name": "CreateEconomicPact",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 99
+        },
+        {
+          "name": "OnlyOneMilitaryPactAllowed",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 113
+        },
+        {
+          "name": "ProvinceSaleTransfersTiles",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 137
+        },
+        {
+          "name": "ProvinceSaleFailsIfBuyerTooPoar",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 179
+        },
+        {
+          "name": "BaseGoldIncomePerTick",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 205
+        },
+        {
+          "name": "EliminatedEntityNoIncome",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_diplomacy.cpp",
+          "line": 216
+        }
+      ]
+    }
+  ]
+}

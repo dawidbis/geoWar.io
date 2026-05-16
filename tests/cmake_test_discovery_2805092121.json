@@ -1,0 +1,32 @@
+{
+  "tests": 4,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "Snapshot",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "EmptyStateDoesNotCrash",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_snapshot.cpp",
+          "line": 57
+        },
+        {
+          "name": "WorldGenStateRoundTrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_snapshot.cpp",
+          "line": 89
+        },
+        {
+          "name": "TileDataPreservedInRoundTrip",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_snapshot.cpp",
+          "line": 171
+        },
+        {
+          "name": "EntityGoldPreserved",
+          "file": "C:\\Users\\Dawid\\Desktop\\claude\\tests\\server\\test_snapshot.cpp",
+          "line": 206
+        }
+      ]
+    }
+  ]
+}

@@ -1,97 +1,89 @@
-﻿#include "server/net/Server.hpp"
-#include "server/sim/GameLoop.hpp"
+﻿#include "server/net/TcpServer.hpp"
+#include "server/management/MatchmakingManager.hpp"
 
 #include <boost/asio.hpp>
-#include <csignal>
-#include <cstdlib>
 #include <iostream>
-#include <memory>
-
-namespace {
-    boost::asio::io_context* g_ioc = nullptr;
-    void signalHandler(int) { if (g_ioc) g_ioc->stop(); }
-}
+#include <thread>
+#include <vector>
+#include <cstdlib>
 
 int main(int argc, char* argv[]) {
     uint16_t port = 7777;
     if (argc > 1) {
         int p = std::atoi(argv[1]);
-        if (p > 0 && p < 65536)
+        if (p > 0 && p < 65536) {
             port = static_cast<uint16_t>(p);
+        }
         else {
             std::cerr << "[main] Invalid port: " << argv[1] << "\n";
             return 1;
         }
     }
 
-    std::cout << "[main] Grand Strategy Server v0.1\n";
-    std::cout << "[main] Port: " << port << "\n";
+    std::cout << "=======================================\n";
+    std::cout << "      Grand Strategy Server v0.2       \n";
+    std::cout << "=======================================\n";
 
     boost::asio::io_context ioc;
-    g_ioc = &ioc;
-    std::signal(SIGINT, signalHandler);
-    std::signal(SIGTERM, signalHandler);
 
-    // GameState — żyje przez cały czas działania serwera
-    gs::server::GameState state;
-
-    // Server + LobbyManager
-    gs::server::Server server(ioc, port);
-
-    // Broadcaster — łączy GameLoop z LobbyManager
-    gs::server::LobbyBroadcaster broadcaster(server.lobby());
-
-    // GameLoop
-    gs::server::GameLoop gameLoop(ioc, state, broadcaster);
-
-    // Gdy lobby zbierze graczy i wystartuje grę — uruchom GameLoop
-    server.lobby().onStartGame([&](std::vector<gs::server::LobbyPlayer> players) {
-        // Zainicjuj encje w GameState
-        for (auto& p : players) {
-            gs::server::Entity entity;
-            entity.id = p.entityId;
-            entity.name = p.name;
-            entity.type = p.isBot
-                ? gs::EntityType::Bot
-                : gs::EntityType::Human;
-            state.entities.push_back(entity);
+    // ZMIANA 1: Zamiast niebezpiecznego std::signal, używamy asynchronicznego signal_set.
+    // To gwarantuje, że zamknięcie ioc.stop() wykona się bezpiecznie na wątku roboczym Asio.
+    boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
+    signals.async_wait([&ioc](const boost::system::error_code& ec, int signal_number) {
+        if (!ec) {
+            std::cout << "\n[main] Signal " << signal_number << " received. Stopping io_context...\n";
+            ioc.stop();
         }
-        state.phase = gs::GamePhase::Playing;
-
-        std::cout << "[main] Game started with "
-            << players.size() << " players\n";
-
-        gameLoop.start();
         });
 
-    // Inputy graczy → GameLoop
-    server.lobby().onPlayerInput([&](uint32_t entityId,
-        gs::Message msg) {
-            // Obsługa wiadomości debug
-            if (msg.header.type == gs::MessageType::DebugStep) {
-                gs::Serializer s(std::span<const uint8_t>(msg.payload));
-                uint32_t n = s.readU32();
-                gameLoop.stepTicks(n);
-                return;
-            }
-            if (msg.header.type == gs::MessageType::DebugSetTickrate) {
-                gs::Serializer s(std::span<const uint8_t>(msg.payload));
-                uint32_t hz = s.readU32();
-                gameLoop.setTickrate(hz);
-                return;
-            }
+    // ZMIANA 2: Work Guard zabezpiecza przed sytuacją, w której ioc.run() mogłoby
+    // przedwcześnie zakończyć pracę z powodu chwilowego braku asynchronicznych zadań.
+    auto workGuard = boost::asio::make_work_guard(ioc);
 
-            // Normalny input — TODO: parsuj PlayerInput z payloadu
-            gs::server::PlayerInput input;
-            input.entityId = entityId;
-            gameLoop.enqueueInput(std::move(input));
+    // 1. Inicjalizacja głównych menedżerów
+    gs::server::management::MatchmakingManager matchmaking(ioc);
+    gs::server::net::TcpServer server(ioc, port);
+
+    // 2. Routing z warstwy sieci do warstwy zarządzania logiką
+    server.onNewConnection([&matchmaking](gs::server::net::ConnectionPtr conn) {
+        matchmaking.handleNewConnection(std::move(conn));
         });
 
+    // 3. Uruchamiamy nasłuchiwanie
     server.start();
 
-    std::cout << "[main] Server running. Press Ctrl+C to stop.\n";
+    // 4. Konfiguracja Puli Wątków (Thread Pool)
+    unsigned int threadCount = std::thread::hardware_concurrency();
+    if (threadCount == 0) threadCount = 4; // Zabezpieczenie (fallback)
+
+    std::cout << "[main] Starting Server on " << threadCount << " hardware threads.\n";
+    std::cout << "[main] Press Ctrl+C to stop.\n";
+
+    std::vector<std::thread> ioThreads;
+    ioThreads.reserve(threadCount - 1);
+
+    // Odpalamy ioc.run() na dodatkowych wątkach (wszystkie z wyjątkiem głównego)
+    for (unsigned int i = 0; i < threadCount - 1; ++i) {
+        ioThreads.emplace_back([&ioc]() {
+            ioc.run();
+            });
+    }
+
+    // Główny wątek też blokujemy na obsłudze zdarzeń
     ioc.run();
 
-    std::cout << "[main] Shutdown complete.\n";
+    // 5. Zamykanie serwera (wykonywane po Ctrl+C i ioc.stop())
+    std::cout << "[main] Shutting down, joining threads...\n";
+
+    // Zwalniamy work guatd, pozwalając wątkom gładko zakończyć przetwarzanie reszty buforów sieciowych
+    workGuard.reset();
+
+    for (auto& t : ioThreads) {
+        if (t.joinable()) {
+            t.join();
+        }
+    }
+
+    std::cout << "[main] Shutdown complete. Goodbye.\n";
     return 0;
 }
